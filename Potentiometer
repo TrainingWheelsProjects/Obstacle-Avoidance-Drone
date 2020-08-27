@@ -1,0 +1,42 @@
+// Defining the 
+const int enableAPin = 11;
+const int in1Pin=10;
+const int in2Pin=9;
+const int button=4;
+
+int pressed=false;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(enableAPin, OUTPUT);
+  pinMode(in1Pin, OUTPUT);
+  pinMode(in2Pin, OUTPUT);
+  pinMode(button, INPUT);
+  }
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int potValue = analogRead(A5);
+  int pwmOutput=map(potValue, 0, 1023, 0, 255);
+  analogWrite(enableAPin, pwmOutput);
+  if (digitalRead(button)==true){
+    pressed=!pressed;
+  }
+  while (digitalRead(button)==true);
+  delay(20);
+
+  if (pressed == true ){
+    digitalWrite(in1Pin, LOW);
+    digitalWrite(in2Pin, HIGH);
+    delay(20);
+  }
+
+ else if (pressed==false){
+    digitalWrite(in1Pin, HIGH);
+  digitalWrite(in2Pin, LOW);
+  delay(10);
+  }
+  
+  
+
+}
